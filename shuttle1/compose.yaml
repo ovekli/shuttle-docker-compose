@@ -13,9 +13,9 @@ services:
         nginx['listen_https'] = false
         nginx['proxy_set_headers'] = { "X-Forwarded-Proto" => "https", "X-Forwarded-Ssl" => "on" }
     volumes:
-       - /data/dockerVolumes/gitlab/config:/etc/gitlab
-       - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab
-       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab   
+       - /data/dockerVolumes/gitlab/config:/etc/gitlab:Z
+       - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab:Z
+       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab:Z  
 
   nexus3:
     image: sonatype/nexus3:3.45.0
@@ -24,7 +24,7 @@ services:
       - 5000:5000
       - 5001:5001
     volumes:
-      - /data/dockerVolumes/nexus3/nexus-data:/nexus-data
+      - /data/dockerVolumes/nexus3/nexus-data:/nexus-data:Z
 
   bind:
     image: sameersbn/bind:latest
@@ -35,20 +35,20 @@ services:
     environment:
        ROOT_PASSWORD: qwe123  
     volumes:
-      - /data/dockerVolumes/nexus3/nexus-data:/nexus-data  
+      - /data/dockerVolumes/nexus3/nexus-data:/nexus-data:Z
 
   ddclient:
     image: ovekli/ddclient:1.0.1
     volumes:
-      - /data/dockerVolumes/ddclient/.ssh/:/root/.ssh_keys           
+      - /data/dockerVolumes/ddclient/.ssh/:/root/.ssh_keys:Z        
 
   nginx-proxy:
     image: ovekli/nginx
     ports:
       - 192.168.243.3:443:443
     volumes:
-      - /data/dockerVolumes/nginx-proxy-config/conf.d:/etc/nginx/conf.d
-      - /data/dockerVolumes/nginx-proxy-ssl/ssl:/etc/nginx/ssl  
+      - /data/dockerVolumes/nginx-proxy-config/conf.d:/etc/nginx/conf.d:Z
+      - /data/dockerVolumes/nginx-proxy-ssl/ssl:/etc/nginx/ssl:Z
     depends_on:
       - gitlab
 
