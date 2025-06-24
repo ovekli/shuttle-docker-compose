@@ -17,4 +17,4 @@ services:
        - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab:z \
        - /data/dockerVolumes/gitlab/data:/var/opt/gitlab:z \       
     networks:
-       - homenet
+       shuttle_network:
