@@ -27,6 +27,8 @@ services:
     volumes:
       - /data/dockerVolumes/nexus3/nexus-data:/nexus-data:Z
       - /data/dockerVolumes/nexus3/backup:/backup:Z
+    depends_on:
+      - gitlab  
 
   bind:
     image: sameersbn/bind:latest
@@ -53,6 +55,8 @@ services:
       - /data/dockerVolumes/nginx-proxy-ssl/ssl:/etc/nginx/ssl:Z
     depends_on:
       - gitlab
+      - nexus3
+      - bind
 
 networks:
   shuttle_network:
