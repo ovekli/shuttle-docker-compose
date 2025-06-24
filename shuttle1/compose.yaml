@@ -15,7 +15,32 @@ services:
     volumes:
        - /data/dockerVolumes/gitlab/config:/etc/gitlab \
        - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab \
-       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab \     
+       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab \   
+
+  nexus3:
+    image: sonatype/nexus3:3.45.0
+    ports:
+      - 8181:8081
+      - 5000:5000
+      - 5001:5001
+    volumes:
+      - /data/dockerVolumes/nexus3/nexus-data:/nexus-data
+
+  bind:
+    image: sameersbn/bind:latest
+    ports:
+      - 192.168.243.3:53:53/udp \
+      - 192.168.243.3:53:53/tcp \
+      - 10000:10000 \
+    environment:
+       ROOT_PASSWORD: qwe123  
+    volumes:
+      - /data/dockerVolumes/nexus3/nexus-data:/nexus-data  
+
+  ddclient:
+    image: ovekli/ddclient:1.0.1
+    volumes:
+      - /data/dockerVolumes/ddclient/.ssh/:/root/.ssh_keys           
 
   nginx-proxy:
     image: ovekli/nginx
