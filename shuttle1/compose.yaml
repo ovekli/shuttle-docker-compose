@@ -1,0 +1,20 @@
+name: shuttle1
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:15.11.12-ce.0
+    ports:
+      - 192.168.243.3:22:22
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.klinghed.se/'
+        gitlab_rails['gitlab_shell_ssh_port'] = 22
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+        nginx['proxy_set_headers'] = { \"X-Forwarded-Proto\" => \"https\", \"X-Forwarded-Ssl\" => \"on\" }
+    volumes:
+       - /data/dockerVolumes/gitlab/config:/etc/gitlab:z \
+       - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab:z \
+       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab:z \       
+    networks:
+       - shuttle1_network
