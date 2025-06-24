@@ -12,6 +12,7 @@ services:
         nginx['listen_port'] = 80
         nginx['listen_https'] = false
         nginx['proxy_set_headers'] = { "X-Forwarded-Proto" => "https", "X-Forwarded-Ssl" => "on" }
+      GITLAB_SKIP_UNMIGRATED_DATA_CHECK: true  
     volumes:
        - /data/dockerVolumes/gitlab/config:/etc/gitlab:Z
        - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab:Z
