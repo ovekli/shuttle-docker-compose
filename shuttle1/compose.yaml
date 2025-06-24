@@ -15,6 +15,17 @@ services:
     volumes:
        - /data/dockerVolumes/gitlab/config:/etc/gitlab \
        - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab \
-       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab \       
+       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab \     
+
+  nginx-proxy:
+    image: nginx-proxy
+    ports:
+      - 192.168.243.3:443:443
+    volumes:
+      - /data/dockerVolumes/nginx-proxy-config/conf.d:/etc/nginx/conf.d
+      - /data/dockerVolumes/nginx-proxy-ssl/ssl:/etc/nginx/ssl  
+    depends_on:
+      - gitlab
+
 networks:
   shuttle_network:
