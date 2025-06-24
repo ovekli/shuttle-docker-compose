@@ -2,7 +2,7 @@ name: shuttle1
 
 services:
   gitlab:
-    image: gitlab/gitlab-ce:15.11.12-ce.0
+    image: gitlab/gitlab-ce:17.2.2-ce.0
     ports:
       - 192.168.243.3:22:22
     environment:
@@ -19,13 +19,14 @@ services:
        - /data/dockerVolumes/gitlab/data:/var/opt/gitlab:Z  
 
   nexus3:
-    image: sonatype/nexus3:3.45.0
+    image: sonatype/nexus3:3.71.0-java17-ubi
     ports:
       - 8181:8081
       - 5000:5000
       - 5001:5001
     volumes:
       - /data/dockerVolumes/nexus3/nexus-data:/nexus-data:Z
+      - /data/dockerVolumes/nexus3/backup:/backup:Z
 
   bind:
     image: sameersbn/bind:latest
