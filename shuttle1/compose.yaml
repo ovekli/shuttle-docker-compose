@@ -13,9 +13,9 @@ services:
         nginx['listen_https'] = false
         nginx['proxy_set_headers'] = { "X-Forwarded-Proto" => "https", "X-Forwarded-Ssl" => "on" }
     volumes:
-       - /data/dockerVolumes/gitlab/config:/etc/gitlab \
-       - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab \
-       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab \   
+       - /data/dockerVolumes/gitlab/config:/etc/gitlab
+       - /data/dockerVolumes/gitlab/logs:/var/Log/gitlab
+       - /data/dockerVolumes/gitlab/data:/var/opt/gitlab   
 
   nexus3:
     image: sonatype/nexus3:3.45.0
@@ -29,9 +29,9 @@ services:
   bind:
     image: sameersbn/bind:latest
     ports:
-      - 192.168.243.3:53:53/udp \
-      - 192.168.243.3:53:53/tcp \
-      - 10000:10000 \
+      - 192.168.243.3:53:53/udp
+      - 192.168.243.3:53:53/tcp
+      - 10000:10000
     environment:
        ROOT_PASSWORD: qwe123  
     volumes:
