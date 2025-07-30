@@ -34,6 +34,7 @@ services:
       - 8181:8081
       - 5000:5000
       - 5001:5001
+      - 5002:5002
     volumes:
       - /data/dockerVolumes/nexus3/nexus-data:/nexus-data:Z
       - /data/dockerVolumes/nexus3/backup:/backup:Z
