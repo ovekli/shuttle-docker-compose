@@ -1,7 +1,7 @@
 name: jenkins
 
 services:
-  gitlab-runner-dind:
+  jenkins:
     ports:
      - 192.168.243.12:8080:8080
     image: jenkins/jenkins:latest
