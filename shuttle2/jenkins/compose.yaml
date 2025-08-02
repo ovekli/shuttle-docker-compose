@@ -1,0 +1,15 @@
+name: jenkins
+
+services:
+  gitlab-runner-dind:
+    ports:
+     - 192.168.243.12:8080:8080
+    image: jenkins/jenkins:latest
+    volumes:
+      - jenkins-home-volume:/var/lib/jenkins
+    networks:
+       - jenkins-network               
+volumes:
+  jenkins-home-volume:
+networks:
+  jenkins-network:  
