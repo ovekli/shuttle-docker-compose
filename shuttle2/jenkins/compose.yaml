@@ -4,7 +4,7 @@ services:
   jenkins:
     ports:
      - 192.168.243.12:8080:8080
-    image: jenkins/jenkins:latest
+    image: jenkins/jenkins:jdk17
     volumes:
       - jenkins-home-volume:/var/jenkins_home
     networks:
