@@ -7,6 +7,7 @@ services:
     image: jenkins/jenkins:jdk17
     volumes:
       - jenkins-home-volume:/var/jenkins_home
+      - /home/ovekli/DockerVolumes/jenkins-config:/tmp/jenkins-config
     networks:
        - jenkins-network               
 volumes:
